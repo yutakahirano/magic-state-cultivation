@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DIRNAME="$(dirname "$0")"
+
+PYTHONPATH=$DIRNAME/../src python3 $DIRNAME/../src/cultiv/count_distillation_cost.py "$@"
