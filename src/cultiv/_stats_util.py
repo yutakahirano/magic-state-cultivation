@@ -105,6 +105,20 @@ def split_by_gap_threshold(stats: list[sinter.TaskStats], *, gap_rounding: int, 
             errors=arg.at_least.errors,
         ),
     )
+    res = [
+        stat
+        for stat in stats
+        if keep_zero or stat.json_metadata.get('gap', 1) > 0
+    ]
+    for stat in res:
+        shots = stat.shots
+        wrong = stat.errors
+        discarded = stat.discards
+        valid = shots - wrong - discarded
+        print('valid = {}, wrong = {}, discarded = {}'.format(valid, wrong, discarded))
+        print('logical error rate = {:.3e}'.format(wrong / (valid + wrong)))
+        print('success rate = {:.3f}'.format((valid + wrong) / shots))
+    print()
     return [
         stat
         for stat in stats
