@@ -1,6 +1,7 @@
 import argparse
 import collections
 import math
+import numpy as np
 
 import stim
 
